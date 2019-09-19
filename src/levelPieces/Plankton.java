@@ -1,17 +1,20 @@
 package levelPieces;
-import gameEngine.*;
+
 import java.util.Random;
 
-public class Squidward extends GamePiece implements Moveable {
+import gameEngine.*;
 
-	public Squidward(char symbol, int location) {
+
+public class Plankton extends GamePiece implements Moveable {
+
+	public Plankton(char symbol, int location) {
 		super(symbol, location);
 		// TODO Auto-generated constructor stub
 	}
 	
 	public InteractionResult interact(Drawable [] pieces, int playerLocation) {
-		if (Math.abs(playerLocation - getLocation() ) == 1) {
-			return InteractionResult.HIT;
+		if (Math.abs(playerLocation - getLocation() ) <= 3) {
+			return InteractionResult.KILL;
 		}
 		else {
 			return InteractionResult.NONE;
@@ -19,17 +22,20 @@ public class Squidward extends GamePiece implements Moveable {
 	}
 	
 	public void move(Drawable[] gameBoard, int playerLocation) {
-		
+
 		Random generator = new Random();
 		
-		int newLocation = generator.nextInt(gameBoard.length);
+		int newLocation = getLocation() + generator.nextInt(gameBoard.length);
+		
+		newLocation %= gameBoard.length;
 		
 		// Loops until finds a location that is not taken
 		while(gameBoard[newLocation] != null ) {
-			newLocation = generator.nextInt(gameBoard.length);
+			newLocation += generator.nextInt(gameBoard.length);
+			newLocation %= gameBoard.length;
 		}
 		
 		setLocation(newLocation);
-		
 	}
+
 }

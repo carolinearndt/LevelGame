@@ -17,18 +17,36 @@ public class LevelEngine {
 	private ArrayList<GamePiece> interactingPieces;
 	// Player keeps track of player status and controls player movement/location
 	
+	private int gameBoardLength = 20;
+	
 	
 	
 	public void createLevel(int levelNum){
 		
 	};
 	public LevelEngine() {
-		super();
-		gameBoard = new Drawable[7];
-		movingPieces.add(new Squidward('Q', 0));
-		interactingPieces.add(new Spongebob('S', gameBoard.length));
-		interactingPieces.add(new Squidward('Q', 0));
+		super();				
+
+		Spongebob spongebob = new Spongebob('S', gameBoardLength - 1);
+		Squidward squidward = new Squidward('Q', 0);
+		Plankton plankton = new Plankton('p', gameBoardLength - 3);
+		Gary gary = new Gary('G', gameBoardLength- 7);
+		Patrick patrick = new Patrick('r', 3);
 		
+		movingPieces.add(squidward);
+		movingPieces.add(plankton);
+		movingPieces.add(gary);
+		
+		interactingPieces.add(spongebob);
+		interactingPieces.add(patrick);
+		interactingPieces.add(plankton);
+		interactingPieces.add(gary);
+		interactingPieces.add(squidward);
+		
+		
+				
+		gameBoard = new Drawable[gameBoardLength];
+
 		levelOne();
 	}
 	
@@ -49,9 +67,14 @@ public class LevelEngine {
 			}
 		}
 	}
-	getBoard();
-	getMovingPieces();
-	getInteractingPieces();
-	getPlayerStartLoc();
+	
+//	getBoard();
+//	updateBoard(){
+	// set all locations to null except rock and player
+	// place in a certain order based on array list
+//}
+//	getMovingPieces();
+//	getInteractingPieces();
+//	getPlayerStartLoc();
 
 	}
