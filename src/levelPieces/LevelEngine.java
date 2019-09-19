@@ -15,9 +15,10 @@ public class LevelEngine {
 	private ArrayList<Moveable> movingPieces;
 	// Only game pieces interact
 	private ArrayList<GamePiece> interactingPieces;
+	//private ArrayList<Drawable> piecesOnBoard; 
 	// Player keeps track of player status and controls player movement/location
-	
-	private int gameBoardLength = 20;
+	private int playerStartingLocation;
+	private int gameBoardLength;
 	
 	
 	
@@ -27,6 +28,12 @@ public class LevelEngine {
 	public LevelEngine() {
 		super();				
 
+		
+		movingPieces = new ArrayList<Moveable>();
+		interactingPieces = new ArrayList<GamePiece>();
+		gameBoardLength = 20;
+		playerStartingLocation = gameBoardLength/2;
+		//piecesOnBoard = new ArrayList<Drawable>();
 		Spongebob spongebob = new Spongebob('S', gameBoardLength - 1);
 		Squidward squidward = new Squidward('Q', 0);
 		Plankton plankton = new Plankton('p', gameBoardLength - 3);
@@ -43,6 +50,9 @@ public class LevelEngine {
 		interactingPieces.add(gary);
 		interactingPieces.add(squidward);
 		
+		//piecesOnBoard.add(squidward);
+		
+		
 		
 				
 		gameBoard = new Drawable[gameBoardLength];
@@ -53,28 +63,27 @@ public class LevelEngine {
 	private void levelOne() {
 		Rock rock = new Rock();
 		gameBoard[Rock.LOCATION] = rock;
-		for (int i = 0; i < gameBoard.length; i++) {
-			if (i == Rock.LOCATION) {
-				continue;
-			}
-			for (int j = 0; j < interactingPieces.size(); j++) {
-				if (i == interactingPieces.get(j).getLocation()) {
-					gameBoard[i] = interactingPieces.get(j);
-				}
-				else {
-					gameBoard[i] = null;
-				}
-			}
+		for (GamePiece g: interactingPieces) {
+			gameBoard[g.getLocation()] = g;
 		}
 	}
 	
-//	getBoard();
+	public Drawable [] getBoard(){
+		return gameBoard;
+	}
+	;
 //	updateBoard(){
 	// set all locations to null except rock and player
 	// place in a certain order based on array list
 //}
-//	getMovingPieces();
-//	getInteractingPieces();
-//	getPlayerStartLoc();
-
-	}
+	public ArrayList<Moveable> getMovingPieces(){
+		return movingPieces;
+	};
+	public ArrayList<GamePiece> getInteractingPieces(){
+		return interactingPieces;
+	};
+	public int getPlayerStartLoc() {
+		return playerStartingLocation;
+	};
+	
+}
