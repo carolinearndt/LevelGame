@@ -30,7 +30,7 @@ public class Plankton extends GamePiece implements Moveable {
 		newLocation %= gameBoard.length;
 		
 		// Loops until finds a location that is not taken
-		while(gameBoard[newLocation] != null ) {
+		while(gameBoard[newLocation] != null || newLocation == playerLocation) {
 			newLocation += generator.nextInt(gameBoard.length);
 			newLocation %= gameBoard.length;
 		}

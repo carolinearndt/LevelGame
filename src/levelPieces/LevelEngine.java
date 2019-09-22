@@ -23,7 +23,12 @@ public class LevelEngine {
 	
 	
 	public void createLevel(int levelNum){
-		
+		if (levelNum == 1) {
+			levelOne();
+		}
+		else {
+			levelTwo();
+		}
 	};
 	public LevelEngine() {
 		super();				
@@ -46,9 +51,9 @@ public class LevelEngine {
 		
 		interactingPieces.add(spongebob);
 		interactingPieces.add(patrick);
+		interactingPieces.add(squidward);
 		interactingPieces.add(plankton);
 		interactingPieces.add(gary);
-		interactingPieces.add(squidward);
 		
 		//piecesOnBoard.add(squidward);
 		
@@ -57,7 +62,6 @@ public class LevelEngine {
 				
 		gameBoard = new Drawable[gameBoardLength];
 
-		levelOne();
 	}
 	
 	private void levelOne() {
@@ -67,15 +71,50 @@ public class LevelEngine {
 			gameBoard[g.getLocation()] = g;
 		}
 	}
+	private void levelTwo() {
+		movingPieces.clear();
+		interactingPieces.clear();
+		
+		gameBoardLength = 25;
+		playerStartingLocation = gameBoardLength/2;
+		gameBoard = new Drawable [gameBoardLength];
+		
+		Squidward squid1 = new Squidward('Q', 18);
+		Squidward squid2 = new Squidward('Q', 2);
+		Plankton plankton1 = new Plankton('p', 3);
+		Plankton plankton2 = new Plankton('p', 19);
+		Gary gary = new Gary('G', 8);
+		Spongebob spongebob = new Spongebob('S', 24);
+		Patrick patrick = new Patrick('r', 15);
+		
+		movingPieces.add(squid1);
+		movingPieces.add(squid2);
+		movingPieces.add(plankton1);
+		movingPieces.add(plankton2);
+		movingPieces.add(gary);
+		
+		interactingPieces.add(spongebob);
+		interactingPieces.add(patrick);
+		interactingPieces.add(squid1);
+		interactingPieces.add(squid2);
+		interactingPieces.add(plankton1);
+		interactingPieces.add(plankton2);
+		interactingPieces.add(gary);
+		
+		Rock rock = new Rock();
+		gameBoard[Rock.LOCATION] = rock;
+		for (GamePiece g: interactingPieces) {
+			gameBoard[g.getLocation()] = g;
+		}
+		
+		
+	}
 	
 	public Drawable [] getBoard(){
 		return gameBoard;
 	}
 	;
-//	updateBoard(){
-	// set all locations to null except rock and player
-	// place in a certain order based on array list
-//}
+	
 	public ArrayList<Moveable> getMovingPieces(){
 		return movingPieces;
 	};

@@ -16,6 +16,6 @@ public class Rock implements Drawable {
 
 
 	public void draw() {
-		System.out.println(SYMBOL);
+		System.out.print(SYMBOL);
 	}
 }

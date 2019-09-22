@@ -1,8 +1,7 @@
 package gameEngine;
 import java.util.ArrayList;
 
-import levelPieces.GamePiece;
-import levelPieces.LevelEngine;
+import levelPieces.*;
 
 /**
  * Framework for LevelGame. 
@@ -96,8 +95,23 @@ public class GameEngine {
 	 */
 	public void movePieces() {
 		for (Moveable piece : movingPieces) {
-			piece.move(gameBoard, player.getLocation());		
+			piece.move(gameBoard, player.getLocation());	
+	
 		}	
+		for(int i = 0; i < gameBoard.length; i ++) {
+			gameBoard[i] = null;
+		}
+		for (int i = 1; i <= movingPieces.size(); i++) {
+			interactingPieces.set(interactingPieces.size() - i , (GamePiece)movingPieces.get(movingPieces.size() - i));
+		}
+		gameBoard[player.getLocation()] = player;
+		Rock rock = new Rock();
+		gameBoard[Rock.LOCATION] = rock;
+		for (GamePiece g: interactingPieces) {
+			gameBoard[g.getLocation()] = g;
+		}
+		
+		
 	}
 
 	/**
